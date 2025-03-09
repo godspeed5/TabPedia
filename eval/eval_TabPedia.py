@@ -3,6 +3,8 @@ import os.path as osp
 import argparse
 import json
 from typing import Dict, Sequence, List
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import PIL
 from PIL import Image, ImageOps
@@ -503,6 +505,7 @@ class Eval():
         
         # load pretrained weights
         state_dict = torch.load(model_name_or_path)
+        # breakpoint()
         missing_keys, unexcepted_keys = model.model.load_state_dict(state_dict, strict=False)
         print(f'Load PTH model from {model_name_or_path}')
         print(f"missing keys: ", missing_keys)
@@ -518,14 +521,14 @@ class Eval():
         from transformers import GenerationConfig as HFGenerationConfig
         hf_gen_config = HFGenerationConfig(
             max_new_tokens=3000,
-            do_sample=False,
+            do_sample=True,
             temperature=0.7,
             repetition_penalty=args.repetition_penalty,
             seed=42,
             eos_token_id=self.tokenizer.eos_token_id,
             pad_token_id=self.tokenizer.pad_token_id,
             num_beams=1,
-            use_cache=True)
+            use_cache=False)
 
         results_record = []
         for k, data in enumerate(tqdm(dataloader)):

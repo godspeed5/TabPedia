@@ -12,7 +12,7 @@ pandas
 pytest
 loguru
 # Minimum 0.40.0.post4 to fix some 4-bit precision bugs
-bitsandbytes>=0.40.0.post4
+bitsandbytes==0.44.0
 # Minimum 2.16.0 to fix some bugs, see https://github.com/huggingface/datasets/pull/6444
 datasets>=2.16.0
 # Minimum 0.1.2 to fix some bugs, see https://github.com/InternLM/lagent/pull/44
@@ -26,3 +26,5 @@ scipy
 SentencePiece
 tiktoken
 timm==0.6.7
+peft==0.10.0
+jsonlines
